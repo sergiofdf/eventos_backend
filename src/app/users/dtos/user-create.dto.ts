@@ -1,5 +1,5 @@
-import { MessagesHelper } from './../../helpers/messages.helper';
-import { UserRole } from './../../shared/models/user-role.model';
+import { MessagesHelper } from 'src/helpers/messages.helper';
+import { UserRole } from 'src/shared/models/user-role.model';
 import { ArrayMinSize, IsEmail, IsNotEmpty, IsArray, IsOptional, IsEmpty } from 'class-validator';
 import { EventRole } from 'src/shared/models/event-role.model';
 import { UserDependent } from 'src/shared/models/user-dependent.model';

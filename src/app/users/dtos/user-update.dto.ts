@@ -1,7 +1,7 @@
 import { ArrayMinSize, IsArray, IsEmail, IsNotEmpty, IsOptional } from 'class-validator';
 import { EventRole } from 'src/shared/models/event-role.model';
 import { UserDependent } from 'src/shared/models/user-dependent.model';
-import { UserRole } from '../../shared/models/user-role.model';
+import { UserRole } from 'src/shared/models/user-role.model';
 
 export class UserUpdateDto {
   constructor(user?: Partial<UserUpdateDto>) {

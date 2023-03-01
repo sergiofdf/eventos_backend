@@ -1,9 +1,9 @@
-import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { JwtAuthGuard } from './app/auth/guards/jwt-auth.guard';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './app/users/users.module';
+import { AuthModule } from './app/auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 
 @Module({

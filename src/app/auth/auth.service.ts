@@ -2,7 +2,7 @@ import { UsersService } from './../users/users.service';
 import { Injectable } from '@nestjs/common';
 import { compareSync } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { User } from 'src/users/schemas/user.schema';
+import { User } from 'src/app/users/schemas/user.schema';
 import { UserPayload } from './models/user-payload.model';
 import { UserJwtToken } from './models/user-jwt-token.model';
 
