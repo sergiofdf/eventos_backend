@@ -3,6 +3,7 @@ import { UserDependent } from './../../shared/models/user-dependent.model';
 import { UserRole } from './../../shared/models/user-role.model';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { hashSync } from 'bcrypt';
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -25,7 +26,7 @@ export class User {
   @Prop({ type: String, required: true })
   email: string;
 
-  @Prop({ type: String, required: true })
+  @Prop({ type: String, required: true, set: (v: string) => hashSync(v, 10) })
   password: string;
 
   @Prop({ type: String, required: true })

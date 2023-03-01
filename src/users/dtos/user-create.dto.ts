@@ -1,3 +1,4 @@
+import { MessagesHelper } from './../../helpers/messages.helper';
 import { UserRole } from './../../shared/models/user-role.model';
 import { ArrayMinSize, IsEmail, IsNotEmpty, IsArray, IsOptional, IsEmpty } from 'class-validator';
 import { EventRole } from 'src/shared/models/event-role.model';
@@ -14,23 +15,23 @@ export class UserCreateDto {
     this.dependents = user?.dependents;
   }
 
-  @IsEmpty({ message: 'O _id não deve ser informado, será criado automaticamente.' })
+  @IsEmpty({ message: MessagesHelper.ID_EMPTY })
   _id: string;
 
-  @IsEmail(undefined, { message: 'O e-mail informado é inválido' })
+  @IsEmail(undefined, { message: MessagesHelper.EMAIL_INVALID })
   email: string;
 
-  @IsNotEmpty({ message: 'Um senha deve ser definida' })
+  @IsNotEmpty({ message: `O valor da senha ${MessagesHelper.NOT_EMPTY}` })
   password: string;
 
-  @IsNotEmpty({ message: 'Nome deve ser informado' })
+  @IsNotEmpty({ message: `O nome ${MessagesHelper.NOT_EMPTY}` })
   name: string;
 
-  @IsNotEmpty({ message: 'Telefone deve ser informado' })
+  @IsNotEmpty({ message: `O telefone ${MessagesHelper.NOT_EMPTY}` })
   phoneNumber: string;
 
   @ArrayMinSize(1, {
-    message: 'No mínimo uma função deve ser informada',
+    message: MessagesHelper.MIN_ROLES,
   })
   eventRoles: EventRole[];
 
