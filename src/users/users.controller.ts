@@ -1,4 +1,3 @@
-import { UseGuards } from '@nestjs/common/decorators/core/use-guards.decorator';
 import { UserDeletedDto } from './dtos/user-deleted.dto';
 import { UserCreateDto } from './dtos/user-create.dto';
 import { UserUpdateDto } from './dtos/user-update.dto';
@@ -6,12 +5,17 @@ import { UsersService } from './users.service';
 import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Res } from '@nestjs/common';
 import { User } from './schemas/user.schema';
 import { NotFoundException } from '@nestjs/common/exceptions';
-import { AuthGuard } from '@nestjs/passport';
+import { CurrentUser } from 'src/shared/decorators/current-user.decorator';
+import { IsPublic } from 'src/shared/decorators/is-public.decorator';
 
 @Controller('/users')
-@UseGuards(AuthGuard('jwt'))
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  @Get('me')
+  getMe(@CurrentUser() user: User) {
+    return user;
+  }
 
   @Get(':userId')
   async getUser(@Param('userId') userId: string): Promise<User> {
@@ -27,6 +31,7 @@ export class UsersController {
     return this.usersService.getUsers();
   }
 
+  @IsPublic()
   @Post()
   async createUser(@Body() user: UserCreateDto): Promise<User> {
     return this.usersService.createUser(user);
