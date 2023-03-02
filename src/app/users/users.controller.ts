@@ -8,7 +8,7 @@ import { NotFoundException } from '@nestjs/common/exceptions';
 import { CurrentUser } from 'src/shared/decorators/current-user.decorator';
 import { IsPublic } from 'src/shared/decorators/is-public.decorator';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { ApiResponse } from '@nestjs/swagger/dist';
+import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { meSwagger } from './swagger/me.swagger';
 import { UnauthorizedSwagger } from './swagger/unauthorized.swagger';
 import { UserSwagger } from './swagger/user.swagger';
@@ -21,6 +21,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get('me')
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Traz informações do usuário logado através do token JWT' })
   @ApiResponse({ status: 200, description: 'Info do usuário logado', type: meSwagger })
   @ApiResponse({ status: 401, description: 'Não Autorizado', type: UnauthorizedSwagger })
@@ -29,6 +30,7 @@ export class UsersController {
   }
 
   @Get(':userId')
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Traz informações do usuário buscado' })
   @ApiResponse({ status: 200, description: 'Info do usuário buscado', type: UserSwagger })
   @ApiResponse({ status: 404, description: 'Usuário não encontrado', type: RequestErrorSwagger })
@@ -42,6 +44,7 @@ export class UsersController {
   }
 
   @Get()
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Traz lista de todos usuários cadastrados' })
   @ApiResponse({ status: 200, description: 'Info do usuário buscado', type: UserSwagger, isArray: true })
   @ApiResponse({ status: 401, description: 'Não Autorizado', type: UnauthorizedSwagger })
@@ -59,6 +62,7 @@ export class UsersController {
   }
 
   @Patch(':userId')
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Atualiza dados do usuário pelo id informado' })
   @ApiResponse({ status: 200, description: 'Info do usuário atualizado com sucesso', type: UserSwagger })
   @ApiResponse({ status: 401, description: 'Não Autorizado', type: UnauthorizedSwagger })
@@ -71,6 +75,7 @@ export class UsersController {
   }
 
   @Delete(':userId')
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Deleta usuário pelo id informado' })
   @ApiResponse({ status: 200, description: 'Info do usuário deletada com sucesso', type: DeletedSwagger })
   @ApiResponse({ status: 401, description: 'Não Autorizado', type: UnauthorizedSwagger })
