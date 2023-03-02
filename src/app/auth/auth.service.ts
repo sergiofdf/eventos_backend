@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   async validateUser(email: string, password: string) {
-    const user = await this.usersService.getUserByEmail(email);
+    const user = await this.usersService.getUserByField({ email });
 
     const isPasswordValid = compareSync(password, user.password);
 

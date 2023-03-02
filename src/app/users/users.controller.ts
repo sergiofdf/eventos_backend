@@ -19,7 +19,7 @@ export class UsersController {
 
   @Get(':userId')
   async getUser(@Param('userId') userId: string): Promise<User> {
-    const result = await this.usersService.getUserById(userId);
+    const result = await this.usersService.getUserByField({ _id: userId });
     if (!result) {
       throw new NotFoundException('Usuário não encontrado');
     }

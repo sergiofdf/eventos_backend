@@ -10,12 +10,8 @@ import { UserDeletedDto } from './dtos/user-deleted.dto';
 export class UsersService {
   constructor(private readonly usersRepository: UsersRepository) {}
 
-  async getUserById(_id: string): Promise<User> {
-    return await this.usersRepository.findOne({ _id });
-  }
-
-  async getUserByEmail(email: string): Promise<User> {
-    return await this.usersRepository.findOne({ email });
+  async getUserByField(userFilterQuery: Partial<User>): Promise<User> {
+    return await this.usersRepository.findOne(userFilterQuery);
   }
 
   async getUsers(): Promise<User[]> {

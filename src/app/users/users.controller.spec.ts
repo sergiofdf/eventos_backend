@@ -62,7 +62,7 @@ describe('UsersController', () => {
         {
           provide: UsersService,
           useValue: {
-            getUserById: jest.fn().mockReturnValue(usersList.find((u) => (u._id = '1'))),
+            getUserByField: jest.fn().mockReturnValue(usersList[0]),
             getUsers: jest.fn().mockResolvedValue(usersList),
             createUser: jest.fn().mockResolvedValue(newCreatedUser),
             updateUser: jest.fn().mockResolvedValue(updatedUser),
@@ -103,7 +103,7 @@ describe('UsersController', () => {
     });
 
     it('should return not found if no result returns from query', async () => {
-      jest.spyOn(usersService, 'getUserById').mockResolvedValueOnce(null);
+      jest.spyOn(usersService, 'getUserByField').mockResolvedValueOnce(null);
       await expect(usersController.getUser('')).rejects.toThrowError(NotFoundException);
     });
   });

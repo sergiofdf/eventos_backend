@@ -1,6 +1,6 @@
 import { EventRole } from 'src/shared/models/event-role.model';
-import { UserDependent } from 'src/shared/models/user-dependent.model';
-import { UserRole } from 'src/shared/models/user-role.model';
+import { UserDependent } from '../../../shared/models/user-dependent.model';
+import { UserRole } from '../../../shared/models/user-role.model';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 import { hashSync } from 'bcrypt';
