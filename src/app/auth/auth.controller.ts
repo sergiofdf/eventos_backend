@@ -18,7 +18,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Cria token de acesso para usuário informado' })
   @ApiResponse({ status: 200, description: 'Token do usuário logado', type: LoginReturnSwagger })
   @ApiResponse({ status: 500, description: 'Não foi possível gerar o token' })
-  async login(@Req() req: AuthRequest) {
+  async login(@Req() req: any) {
     return await this.authService.login(req.user);
   }
 }
