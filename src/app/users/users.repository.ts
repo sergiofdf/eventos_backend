@@ -1,5 +1,4 @@
 import { UserDeletedDto } from './dtos/user-deleted.dto';
-import { UserCreateDto } from './dtos/user-create.dto';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { FilterQuery, Model } from 'mongoose';
@@ -10,7 +9,6 @@ export class UsersRepository {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
   async findOne(userFilterQuery: FilterQuery<User>): Promise<User> {
-    const result = await this.userModel.findOne(userFilterQuery);
     return await this.userModel.findOne(userFilterQuery);
   }
 
@@ -28,7 +26,6 @@ export class UsersRepository {
   }
 
   async deleteById(userFilterQuery: FilterQuery<User>): Promise<UserDeletedDto> {
-    const result = await this.userModel.deleteOne(userFilterQuery);
-    return result;
+    return await this.userModel.deleteOne(userFilterQuery);
   }
 }

@@ -43,6 +43,7 @@ export class UsersController {
     return result;
   }
 
+  @IsPublic()
   @Get()
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Traz lista de todos usuários cadastrados' })

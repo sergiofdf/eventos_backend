@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './app/users/users.module';
 import { AuthModule } from './app/auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
+import { ChurchEventsModule } from './app/church-events/church-events.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { APP_GUARD } from '@nestjs/core';
     }),
     UsersModule,
     AuthModule,
+    ChurchEventsModule,
   ],
   controllers: [],
   providers: [
