@@ -66,15 +66,15 @@ describe('ChurchEventsService', () => {
     });
   });
 
-  describe('getChurchEventByField', () => {
+  describe('getChurchEventById', () => {
     it('should return a specific event given a query filter', async () => {
-      const result = await churchEventsService.getChurchEventByField({ _id: '1' });
+      const result = await churchEventsService.getChurchEventById({ _id: '1' });
       expect(result).toEqual(churchEventsList[0]);
     });
 
     it('should return null if no event is found by query filter', async () => {
       jest.spyOn(churchEventsRepository, 'findOne').mockResolvedValueOnce(null);
-      const result = await churchEventsService.getChurchEventByField({ _id: '11' });
+      const result = await churchEventsService.getChurchEventById({ _id: '11' });
       expect(result).toBeNull();
     });
   });

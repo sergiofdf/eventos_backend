@@ -14,7 +14,7 @@ export class ChurchEventsService {
     return await this.churchEventsRepository.find({ churchEventsFilterQuery });
   }
 
-  async getChurchEventByField(churchEventsFilterQuery: Partial<ChurchEvent>): Promise<ChurchEvent> {
+  async getChurchEventById(churchEventsFilterQuery: Partial<ChurchEvent>): Promise<ChurchEvent> {
     return await this.churchEventsRepository.findOne(churchEventsFilterQuery);
   }
 
