@@ -26,5 +26,5 @@ export class ChurchEventUpdateDto {
   @IsArray({
     message: MessagesHelper.ARRAY_ATTENDANTS,
   })
-  attendants?: User[];
+  attendants?: Partial<User>[];
 }

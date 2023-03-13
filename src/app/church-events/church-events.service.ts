@@ -1,3 +1,4 @@
+import { NotFoundException } from '@nestjs/common/exceptions';
 import { ChurchEventDeletedDto } from './dtos/church-event-deleted.dto';
 import { ChurchEvent } from './schemas/church-event.schema';
 import { Injectable } from '@nestjs/common';
@@ -5,6 +6,8 @@ import { ChurchEventsRepository } from './church-events.repository';
 import { ChurchEventCreateDto } from './dtos/church-event-create.dto';
 import { randomUUID } from 'crypto';
 import { ChurchEventUpdateDto } from './dtos/church-event-update.dto';
+import { User } from '../users/schemas/user.schema';
+import { CurrentUser } from 'src/shared/decorators/current-user.decorator';
 
 @Injectable()
 export class ChurchEventsService {
@@ -34,5 +37,18 @@ export class ChurchEventsService {
 
   async deleteChurchEventById(_id: string): Promise<ChurchEventDeletedDto> {
     return await this.churchEventsRepository.deleteById({ _id });
+  }
+
+  async addParticipant(_id: string, participantIdToAdd: Partial<User>): Promise<ChurchEvent> {
+    const currentEvent = await this.getChurchEventById({ _id });
+    if (!currentEvent) {
+      throw new NotFoundException('Evento não encontrado');
+    }
+    currentEvent.attendants.push(participantIdToAdd);
+    return this.updateChurchEvent(_id, { attendants: currentEvent.attendants });
+  }
+
+  async listMyEvents(_id: string): Promise<ChurchEvent[]> {
+    return await this.churchEventsRepository.find({ attendants: _id });
   }
 }

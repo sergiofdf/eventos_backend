@@ -27,7 +27,7 @@ export class ChurchEvent {
   endTime: Date;
 
   @Prop({ type: [{ type: mongoose.Schema.Types.String, ref: 'User' }] })
-  attendants: User[];
+  attendants: Partial<User>[];
 }
 
 export const ChurchEventSchema = SchemaFactory.createForClass(ChurchEvent);

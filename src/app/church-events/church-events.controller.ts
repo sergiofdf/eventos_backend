@@ -5,6 +5,8 @@ import { ChurchEventsService } from './church-events.service';
 import { IsPublic } from 'src/shared/decorators/is-public.decorator';
 import { ChurchEventCreateDto } from './dtos/church-event-create.dto';
 import { ChurchEventUpdateDto } from './dtos/church-event-update.dto';
+import { User } from '../users/schemas/user.schema';
+import { CurrentUser } from 'src/shared/decorators/current-user.decorator';
 
 @Controller('church-events')
 export class ChurchEventsController {
@@ -14,6 +16,15 @@ export class ChurchEventsController {
   @Get()
   async getChurchEvents(): Promise<ChurchEvent[]> {
     return this.churchEventsService.getChurchEvents();
+  }
+
+  @Get('my-events')
+  async listMyEvents(@CurrentUser() user: User): Promise<ChurchEvent[]> {
+    const result = await this.churchEventsService.listMyEvents(user._id);
+    if (!result) {
+      throw new NotFoundException('Eventos não encontrados');
+    }
+    return result;
   }
 
   @Get(':eventId')
@@ -46,5 +57,15 @@ export class ChurchEventsController {
   @Delete(':eventId')
   async deleteChurchEvent(@Param('eventId') eventId: string): Promise<ChurchEventDeletedDto> {
     return await this.churchEventsService.deleteChurchEventById(eventId);
+  }
+
+  @IsPublic()
+  @Patch('add-participant/:eventId/')
+  async addParticipantToEvent(@Param('eventId') eventId: string, @Body() _id: Partial<User>): Promise<ChurchEvent> {
+    const result = await this.churchEventsService.addParticipant(eventId, _id);
+    if (!result) {
+      throw new NotFoundException('Evento não encontrado');
+    }
+    return result;
   }
 }
