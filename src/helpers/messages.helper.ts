@@ -4,4 +4,6 @@ export const MessagesHelper = {
   NOT_EMPTY: 'deve ser informado.',
   MIN_ROLES: 'No mínimo uma função deve ser informada',
   PASSWORD_OR_EMAIL_INVALID: 'E-mail ou senha inválidos.',
+  DATE_INVALID: 'A data e hora informada deve estar no padrão YYYY-MM-DDThh:mm',
+  ARRAY_ATTENDANTS: 'Os participantes devem ser declarados em um array.',
 };
