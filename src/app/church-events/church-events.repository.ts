@@ -9,7 +9,7 @@ export class ChurchEventsRepository {
   constructor(@InjectModel(ChurchEvent.name) private churchEventModel: Model<ChurchEventDocument>) {}
 
   async findOne(churchEventFilterQuery: FilterQuery<ChurchEvent>): Promise<ChurchEvent> {
-    return await this.churchEventModel.findOne(churchEventFilterQuery);
+    return await this.churchEventModel.findOne(churchEventFilterQuery).populate('attendants').exec();
   }
 
   async find(churchEventFilterQuery?: FilterQuery<ChurchEvent>): Promise<ChurchEvent[]> {

@@ -19,7 +19,8 @@ async function bootstrap() {
     .setDescription('Eventos da Paróquia Menino Deus')
     .setVersion('1.0')
     .addTag('login')
-    .addTag('users')
+    .addTag('usuarios')
+    .addTag('eventos')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);

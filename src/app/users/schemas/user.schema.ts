@@ -26,7 +26,13 @@ export class User {
   @Prop({ type: String, required: true })
   email: string;
 
-  @Prop({ type: String, required: true, set: (v: string) => hashSync(v, 10) })
+  @Prop({
+    type: String,
+    required: true,
+    set: (v: string) => {
+      if (v) return hashSync(v, 10);
+    },
+  })
   password: string;
 
   @Prop({ type: String, required: true })

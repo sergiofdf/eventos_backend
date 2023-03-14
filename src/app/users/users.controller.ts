@@ -10,12 +10,12 @@ import { IsPublic } from 'src/shared/decorators/is-public.decorator';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { meSwagger } from './swagger/me.swagger';
-import { UnauthorizedSwagger } from './swagger/unauthorized.swagger';
 import { UserSwagger } from './swagger/user.swagger';
-import { RequestErrorSwagger } from './swagger/request-error.swagger';
-import { DeletedSwagger } from './swagger/deleted.swagger';
+import { UnauthorizedSwagger } from 'src/shared/swagger/unauthorized.swagger';
+import { RequestErrorSwagger } from 'src/shared/swagger/request-error.swagger';
+import { DeletedSwagger } from 'src/shared/swagger/deleted.swagger';
 
-@ApiTags('users')
+@ApiTags('usuarios')
 @Controller('/users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -43,7 +43,6 @@ export class UsersController {
     return result;
   }
 
-  @IsPublic()
   @Get()
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Traz lista de todos usuários cadastrados' })
